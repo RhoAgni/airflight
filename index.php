@@ -196,14 +196,15 @@ session_start();
         <!-- Float links to the right. Hide them on small screens -->
         <div class="w3-right w3-hide-small">
           <a class="w3-bar-item w3-button">Info voli</a>
-          <a class="w3-bar-item w3-button">Aiuto</a>
           <?php
           include "config.php";
           // Check user login or not
           if(!isset($_SESSION['email'])){
-            echo'<a class="w3-bar-item w3-button" onclick="modal()">Accedi</a>';
+            echo'<a class="w3-bar-item w3-button" onclick="register()">Register</a>';
+            echo'<a class="w3-bar-item w3-button" onclick="login()">Accedi</a>';
           }
           else {
+            echo'<a href="profile.php" class="w3-bar-item w3-button">Account</a>';
             echo'<a href="logout.php" class="w3-bar-item w3-button">Logout</a>';
           }
 
@@ -212,11 +213,11 @@ session_start();
         </div>
       </div>
     </div>
-    <div id="id01" class="modal">
+    <div id="access" class="modal">
       <form class="modal-content animate" action="verifica.php" method="post">
         <div class="imgcontainer">
-          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-          <img src="Airflight.png" alt="Avatar" class="avatar">
+          <span onclick="document.getElementById('access').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <img src="images/Airflight.png" alt="logo" class="avatar">
         </div>
         <div class="container">
           <label for="uname"><b>Email</b></label>
@@ -229,12 +230,45 @@ session_start();
         </div>
 
         <div class="container w3-center">
-          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+          <button type="button" onclick="document.getElementById('access').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div id="register" class="modal">
+      <form onsubmit="validation()" name="register_form" class="modal-content animate" action="regist.php" method="post">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('register').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <img src="images/Airflight.png" alt="logo" class="avatar">
+        </div>
+        <div class="container">
+          <label for="name"><b>Name</b></label>
+          <input type="text" placeholder="Name" name="name" required>
+
+          <label for="lname"><b>Last Name</b></label>
+          <input type="text" placeholder="Last name" name="lname" required>
+
+          <label for="age"><b>Birth day</b></label>
+          <input type="date" placeholder="DD/MM/YYYY" name="age" required>
+
+          <label for="email"><b>Email</b></label>
+          <input type="email" placeholder="Inserisci email" name="email" required>
+
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Inserisci Password" name="psw" required>
+
+          <label for="psw"><b>Repet Password</b></label>
+          <input type="password" placeholder="Repet Password" name="r_psw"  required>
+
+          <input type="submit" class="registerbtn" value="Register" name="r_submit" id="r_submit" />
+        </div>
+
+        <div class="container w3-center">
+          <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
         </div>
       </form>
     </div>
     <header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
-      <img class="w3-image" src="landscape.jpg" width="1500" height="800">
+      <img class="w3-image" src="images/landscape.jpg" width="1500" height="800">
       <div class="w3-display-middle w3-margin-top w3-center">
         <form action="" name="prenotazione" onsubmit="showHint()">
           <div class="w3-container w3-white w3-left-align">
@@ -292,7 +326,7 @@ session_start();
         <div class="w3-display-container">
           <div class="w3-display-topleft w3-black w3-padding">Emirati Arabi Uniti</div>
           <a href="#ritorno">
-          <img src="emirati.jpg" alt="Emirati Arabi Uniti" onclick="change(this.alt)" style="width:100%; height:250px"">
+          <img src="images/emirati.jpg" alt="Emirati Arabi Uniti" onclick="change(this.alt)" style="width:100%; height:250px"">
           </a>
         </div>
       </div>
@@ -300,7 +334,7 @@ session_start();
         <div class="w3-display-container">
           <div class="w3-display-topleft w3-black w3-padding">Giappone</div>
           <a href="#ritorno">
-          <img src="giappone.jpg" alt="Giappone" onclick="change(this.alt)" style="width:100%; height:250px"">
+          <img src="images/giappone.jpg" alt="Giappone" onclick="change(this.alt)" style="width:100%; height:250px"">
           </a>
         </div>
       </div>
@@ -308,7 +342,7 @@ session_start();
         <div class="w3-display-container">
           <div class="w3-display-topleft w3-black w3-padding">Russia</div>
           <a href="#ritorno">
-          <img src="russia.jpg" alt="Russia" onclick="change(this.alt)" style="width:100%; height:250px"">
+          <img src="images/russia.jpg" alt="Russia" onclick="change(this.alt)" style="width:100%; height:250px"">
           </a>
         </div>
       </div>
@@ -316,7 +350,7 @@ session_start();
         <div class="w3-display-container">
           <div class="w3-display-topleft w3-black w3-padding">Francia</div>
           <a href="#ritorno">
-          <img src="francia.jpg" alt="Francia" onclick="change(this.alt)" style="width:100%; height:250px"">
+          <img src="images/francia.jpg" alt="Francia" onclick="change(this.alt)" style="width:100%; height:250px"">
           </a>
         </div>
       </div>
@@ -327,7 +361,7 @@ session_start();
         <div class="w3-display-container">
           <div class="w3-display-topleft w3-black w3-padding">Stati Uniti d'America</div>
           <a href="#ritorno">
-          <img src="stati_uniti.jpg" alt="Stati Uniti" onclick="change(this.alt)" style="width:99%; height:250px"">
+          <img src="images/stati_uniti.jpg" alt="Stati Uniti" onclick="change(this.alt)" style="width:99%; height:250px"">
           </a>
         </div>
       </div>
@@ -335,7 +369,7 @@ session_start();
         <div class="w3-display-container">
           <div class="w3-display-topleft w3-black w3-padding">Islanda</div>
           <a href="#ritorno">
-          <img src="islanda.jpg" alt="Islanda" onclick="change(this.alt)" style="width:99%; height:250px"">
+          <img src="images/islanda.jpg" alt="Islanda" onclick="change(this.alt)" style="width:99%; height:250px"">
           </a>
         </div>
       </div>
@@ -343,7 +377,7 @@ session_start();
         <div class="w3-display-container">
           <div class="w3-display-topleft w3-black w3-padding">Norvegia</div>
           <a href="#ritorno">
-          <img src="norvegia.jpg" alt="Norvegia" onclick="change(this.alt)" style="width:99%; height:250px"">
+          <img src="images/norvegia.jpg" alt="Norvegia" onclick="change(this.alt)" style="width:99%; height:250px"">
           </a>
         </div>
       </div>
@@ -351,7 +385,7 @@ session_start();
         <div class="w3-display-container">
           <div class="w3-display-topleft w3-black w3-padding">Hawaii</div>
           <a href="#ritorno">
-          <img src="hawaii.jpg" alt="Honolulu" onclick="change(this.alt)" style="width:99%; height:250px"">
+          <img src="images/hawaii.jpg" alt="Honolulu" onclick="change(this.alt)" style="width:99%; height:250px"">
           </a>
         </div>
       </div>
@@ -392,12 +426,12 @@ session_start();
       function myFunction() {
         var checkBox = document.getElementById("ritorno");
         if (checkBox.checked == true){
-          document.getElementById("data_ritorno").style.visibility = "hidden";
-          document.getElementById("data_ritorno2").style.visibility = "hidden";
+          document.getElementById("data_ritorno").style.display = "none";
+          document.getElementById("data_ritorno2").style.display = "none";
       }
         else{
-          document.getElementById("data_ritorno").style.visibility = "visible";
-          document.getElementById("data_ritorno2").style.visibility = "visible";
+          document.getElementById("data_ritorno").style.display = "block";
+          document.getElementById("data_ritorno2").style.display = "block";
         }
       }
       function plus(){
@@ -426,10 +460,10 @@ session_start();
           document.getElementById("meno").style.cursor = "not-allowed";
         }
       }
-      function modal(){
+      function login(){
       // Get the modal
-      document.getElementById('id01').style.display='block'
-      var modal = document.getElementById('id01');
+      document.getElementById('access').style.display='block';
+      var modal = document.getElementById('access');
 
       // When the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {
@@ -438,6 +472,28 @@ session_start();
           }
       }
     }
+    function register(){
+    // Get the modal
+    document.getElementById('register').style.display='block';
+    var modal = document.getElementById('register');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+  }
+  function validation(){
+    var x = document.forms["register_form"]["psw"].value;
+    var y = document.forms["register_form"]["r_psw"].value;
+    if (x!=y) {
+      alert("passwords do not match");
+
+    }
+
+  }
+
     </script>
   </body>
 </html>

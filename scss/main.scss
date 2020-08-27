@@ -1,0 +1,15 @@
+//compileExpanded $1.min.css
+@import 'variables';
+@import 'mixis';
+
+ *{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+ body{
+   background-color:$primary_color;
+   font-family: $font;
+ }
+@import'header';
+@import 'page';

@@ -1,0 +1,83 @@
+//main: main.scss
+nav{
+  height: 10vh;
+  background:$secondary_color;
+}
+
+.nav-links{
+  display:flex;
+  list-style-type: none;
+  width: 25%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  li a {
+    color: $text_primary_color;
+    text-decoration: none;
+    font-size: 16px;
+  }
+}
+
+.right{
+  margin-left: auto;
+  margin-top: -10vh;
+}
+.left
+{
+  margin-right: auto;
+}
+
+
+@media screen and (max-width: 768px){
+  .line{
+    width: 30px;
+    height: 3px;
+    background: $third_color;
+    margin: 5px;
+  }
+
+  nav {
+    position: relative;
+  }
+
+  .hamburger{
+    position:absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 50%;
+    transform: translate(-5%, -50%);
+    z-index: 3;
+  }
+
+  .nav-links{
+    position: fixed;
+    background: $secondary_color;
+    width: 100%;
+    flex-direction: column;
+    clip-path: circle(100px at 90% -25%);
+    -webkit-clip-path: circle(100px at 90% -25%);
+    transition: all 1s ease-out;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .right{
+    margin-top: 50vh;
+    height: 50vh;
+  }
+  .left{
+    height: 50vh;
+  }
+
+  .nav-links.open{
+    clip-path: circle(1300px at 90% -10%);
+    -webkit-clip-path: circle(1300px at 90% -10%);
+    pointer-events: all;
+  }
+  .right.open{
+    clip-path: circle(1300px at 90% -10%);
+    -webkit-clip-path: circle(1300px at 90% -10%);
+    pointer-events: all;
+    z-index: 2;
+  }
+
+}
